@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api, type JobListItem } from '../lib/api';
 import { JobCard } from '../components/JobCard';
-import { VideoPlayer } from '../components/VideoPlayer';
 import { TrendingUp, Award, Users, Zap, Briefcase, Bell, Menu, Search } from 'lucide-react';
 
 type Job = JobListItem;
@@ -13,7 +12,6 @@ interface HomePageProps {
 export function HomePage({ onJobClick }: HomePageProps) {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
-  const [categoryVideo, setCategoryVideo] = useState<{ title: string; url: string } | null>(null);
 
   useEffect(() => {
     fetchJobs();
@@ -35,30 +33,6 @@ export function HomePage({ onJobClick }: HomePageProps) {
     { icon: Award, title: 'Verified Company', desc: 'Perusahaan terkurasi', color: 'from-amber-500 to-orange-500' },
     { icon: Users, title: 'Career Path', desc: 'Jenjang jelas & stabil', color: 'from-emerald-500 to-teal-500' },
     { icon: Zap, title: 'Quick Apply', desc: 'Lamar hanya 1 klik', color: 'from-blue-500 to-cyan-500' },
-  ];
-
-  const categories = [
-    {
-      id: 'bbdl-1',
-      title: 'Belajar Bersama Dafa dan Lulu #1',
-      subtitle: 'Musik cover • Episode 1',
-      url: 'https://www.youtube.com/watch?v=UQ6T0awqQfs&list=PLTCBny-LOCyzkfEO7XbiRueFNuP875kKd',
-      color: 'from-indigo-500 to-sky-500',
-    },
-    {
-      id: 'bbdl-2',
-      title: 'Belajar Bersama Dafa dan Lulu #2',
-      subtitle: 'Musik cover • Episode 2',
-      url: 'https://www.youtube.com/watch?v=En3uu1LwEDs&list=PLTCBny-LOCyzkfEO7XbiRueFNuP875kKd&index=2',
-      color: 'from-emerald-500 to-teal-500',
-    },
-    {
-      id: 'bbdl-3',
-      title: 'Belajar Bersama Dafa dan Lulu #3',
-      subtitle: 'Musik cover • Episode 3',
-      url: 'https://www.youtube.com/watch?v=iAhwyiUFM6Y&list=PLTCBny-LOCyzkfEO7XbiRueFNuP875kKd&index=3',
-      color: 'from-amber-500 to-orange-500',
-    },
   ];
 
   return (
@@ -122,33 +96,6 @@ export function HomePage({ onJobClick }: HomePageProps) {
       </section>
 
       <section className="mx-auto -mt-8 w-full max-w-5xl px-4">
-        <div className="mb-6 rounded-3xl border border-slate-200/80 bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.09)] md:p-6">
-          <div className="mb-4 flex items-end justify-between">
-            <div>
-              <h2 className="text-xl font-extrabold text-slate-900 md:text-2xl">Kategori Belajar</h2>
-              <p className="mt-1 text-sm text-slate-500">Belajar Bersama Dafa dan Lulu</p>
-            </div>
-            <span className="rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white md:text-sm">3 video</span>
-          </div>
-          <div className="grid gap-3 md:grid-cols-3">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                type="button"
-                onClick={() => setCategoryVideo({ title: category.title, url: category.url })}
-                className="group flex w-full flex-col rounded-2xl border border-slate-200 bg-slate-50 p-4 text-left transition hover:-translate-y-0.5 hover:bg-white hover:shadow-md"
-              >
-                <div className={`mb-3 h-10 w-10 rounded-xl bg-gradient-to-br ${category.color}`} />
-                <p className="text-sm font-bold text-slate-900">{category.title}</p>
-                <p className="mt-1 text-xs text-slate-500">{category.subtitle}</p>
-                <span className="mt-3 inline-flex w-fit items-center rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
-                  Lihat Video
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
         <div className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.09)] md:p-6">
           <div className="mb-5 flex items-end justify-between">
             <div>
@@ -189,24 +136,6 @@ export function HomePage({ onJobClick }: HomePageProps) {
           )}
         </div>
       </section>
-
-      {categoryVideo && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 px-4">
-          <div className="w-full max-w-3xl rounded-2xl bg-white p-5 shadow-xl">
-            <div className="mb-3 flex items-center justify-between">
-              <h3 className="text-lg font-extrabold text-slate-900">{categoryVideo.title}</h3>
-              <button
-                type="button"
-                onClick={() => setCategoryVideo(null)}
-                className="rounded-lg border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-50"
-              >
-                Tutup
-              </button>
-            </div>
-            <VideoPlayer url={categoryVideo.url} title={categoryVideo.title} />
-          </div>
-        </div>
-      )}
     </div>
   );
 }
