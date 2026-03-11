@@ -267,6 +267,10 @@ form input {
   padding: 24px;
 }
 
+.modal.hidden {
+  display: none;
+}
+
 .modal-content {
   width: 100%;
   max-width: 640px;
