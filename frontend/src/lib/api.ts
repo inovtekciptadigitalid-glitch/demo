@@ -367,23 +367,6 @@ const demoJobDetails: Record<string, Pick<JobDetail, 'description' | 'requiremen
   },
 };
 
-const demoVideoByCategory = {
-  frontend: 'https://www.youtube.com/watch?v=3JZ4pnNtyxQ',
-  backend: 'https://www.youtube.com/watch?v=VjHMDlAPMUw',
-  design: 'https://www.youtube.com/watch?v=hT_nvWreIhg',
-  general: 'https://www.youtube.com/watch?v=5qap5aO4i9A',
-};
-
-function resolveDemoVideoUrl(job: JobListItem): string {
-  const title = job.title.toLowerCase();
-  if (title.includes('frontend')) return demoVideoByCategory.frontend;
-  if (title.includes('backend')) return demoVideoByCategory.backend;
-  if (title.includes('ui') || title.includes('ux') || title.includes('designer')) {
-    return demoVideoByCategory.design;
-  }
-  return demoVideoByCategory.general;
-}
-
 interface DemoState {
   jobs: JobListItem[];
   applications: ApplicationItem[];
@@ -393,30 +376,6 @@ const demoState: DemoState = {
   jobs: [],
   applications: [],
 };
-
-const demoApplicationsSeed: ApplicationItem[] = [
-  {
-    id: 'app-1',
-    status: 'reviewing',
-    screening_score: 78,
-    screening_result: 'pass',
-    screening_notes: 'Lokasi cocok | Pengalaman cukup | Usia sesuai',
-    intro_video_url: resolveDemoVideoUrl(demoJobsSeed[0]),
-    applied_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
-    jobs: {
-      id: demoJobsSeed[0].id,
-      title: demoJobsSeed[0].title,
-      location: demoJobsSeed[0].location,
-      companies: demoJobsSeed[0].companies,
-    },
-    candidate: {
-      id: 'profile-1',
-      full_name: 'Lutfi Dani',
-      location: 'Jakarta',
-      phone: '0812-0000-0000',
-    },
-  },
-];
 
 function loadDemoState() {
   if (typeof window === 'undefined') {
@@ -429,7 +388,7 @@ function loadDemoState() {
   const appsRaw = window.localStorage.getItem(DEMO_APPLICATIONS_KEY);
 
   demoState.jobs = jobsRaw ? (JSON.parse(jobsRaw) as JobListItem[]) : demoJobsSeed;
-  demoState.applications = appsRaw ? (JSON.parse(appsRaw) as ApplicationItem[]) : demoApplicationsSeed;
+  demoState.applications = appsRaw ? (JSON.parse(appsRaw) as ApplicationItem[]) : [];
 }
 
 function persistDemoState() {
@@ -867,14 +826,14 @@ export const api = {
       }
       const profile = demoProfiles[session.profile_id];
       const screening = profile ? calculateScreening(profile, job) : { score: 0, result: null, status: 'pending', notes: null };
-      const introUrl = resolveDemoVideoUrl(job);
+      const introUrl = typeof window !== 'undefined' ? URL.createObjectURL(introVideo) : null;
       const newApp: ApplicationItem = {
         id: `app-${Date.now()}`,
         status: screening.status,
         screening_score: screening.score,
         screening_result: screening.result,
         screening_notes: screening.notes,
-        intro_video_url: introUrl,
+        intro_video_url: introUrl ?? null,
         applied_at: new Date().toISOString(),
         jobs: {
           id: job.id,

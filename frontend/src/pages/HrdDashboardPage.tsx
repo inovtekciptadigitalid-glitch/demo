@@ -1,6 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { api, type ApplicationItem, type CompanyItem, type CreateJobPayload, type SessionUser } from '../lib/api';
-import { VideoPlayer } from '../components/VideoPlayer';
 import { LogOut, Send } from 'lucide-react';
 
 interface HrdDashboardPageProps {
@@ -473,7 +472,12 @@ export function HrdDashboardPage({ user, onLogout }: HrdDashboardPageProps) {
                 Tutup
               </button>
             </div>
-            <VideoPlayer url={previewVideoUrl} title={previewVideoTitle} />
+            <video
+              src={previewVideoUrl}
+              controls
+              preload="metadata"
+              className="w-full rounded-xl border border-slate-200"
+            />
           </div>
         </div>
       )}
