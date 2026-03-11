@@ -24,6 +24,16 @@ php artisan migrate
 php artisan serve --host 0.0.0.0 --port 8001
 ```
 
+## Mode Demo (Frontend Only)
+Jika hanya butuh tampilan (tanpa backend), set di `demo/frontend/.env`:
+```
+VITE_DEMO_MODE=true
+```
+Login akan memakai akun demo:
+- admin@karirku.test / admin12345
+- hrd@karirku.test / hrd12345
+- user@karirku.test / user12345
+
 ## Konfigurasi Supabase (Backend)
 Lihat panduan lengkap di `demo/backend/supabase/README.md`.
 
