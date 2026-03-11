@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KarirKu Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <main class="login" id="loginView">
+        <section class="login-card">
+          <div class="brand">
+            <div class="brand-icon">💼</div>
+            <div>
+              <div class="brand-title">KarirKu</div>
+              <div class="brand-subtitle">Portal lowongan kerja modern</div>
+            </div>
+          </div>
+          <h1>Masuk ke Akun Demo</h1>
+          <p class="subtitle">Login sebagai admin, HRD, atau user untuk mencoba demo.</p>
+
+          <div class="role-buttons">
+            <button data-role="admin" class="role-btn">Pakai Akun Admin</button>
+            <button data-role="hrd" class="role-btn">Pakai Akun HRD</button>
+            <button data-role="user" class="role-btn">Pakai Akun User</button>
+          </div>
+
+          <form id="loginForm">
+            <label>
+              Email
+              <input type="email" id="emailInput" required />
+            </label>
+            <label>
+              Password
+              <input type="password" id="passwordInput" required />
+            </label>
+            <button type="submit" class="primary">Login</button>
+          </form>
+
+          <div class="hint">
+            Demo offline, tidak terhubung ke backend.
+          </div>
+        </section>
+      </main>
+
+      <main class="dashboard hidden" id="dashboardView">
+        <header class="topbar">
+          <div class="topbar-left">
+            <div class="brand-inline">
+              <div class="brand-icon">💼</div>
+              <div>
+                <div class="brand-title">KarirKu</div>
+                <div class="brand-subtitle" id="roleBadge">Role</div>
+              </div>
+            </div>
+          </div>
+          <div class="topbar-right">
+            <button id="logoutBtn" class="ghost">Logout</button>
+          </div>
+        </header>
+
+        <nav class="nav">
+          <button data-view="home" class="nav-btn active">Home</button>
+          <button data-view="jobs" class="nav-btn">Jobs</button>
+          <button data-view="applications" class="nav-btn">Applications</button>
+          <button data-view="profile" class="nav-btn">Profile</button>
+          <button data-view="hrd" class="nav-btn" id="hrdTab">HRD</button>
+          <button data-view="admin" class="nav-btn" id="adminTab">Admin</button>
+        </nav>
+
+        <section class="content">
+          <div id="view-home" class="view">
+            <h2>Ringkasan Demo</h2>
+            <p>Coba klik menu Jobs, Applications, Profile, HRD, atau Admin untuk melihat fitur demo.</p>
+            <div class="cards">
+              <div class="card">
+                <h3>Skrining Otomatis</h3>
+                <p>Lokasi, pengalaman, dan usia dihitung otomatis saat melamar.</p>
+              </div>
+              <div class="card">
+                <h3>Video Perkenalan</h3>
+                <p>Kandidat wajib upload video 5 menit sebelum melamar.</p>
+              </div>
+              <div class="card">
+                <h3>Approval Lowongan</h3>
+                <p>Admin menyetujui lowongan sebelum tayang.</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="view-jobs" class="view hidden">
+            <div class="split">
+              <div>
+                <h2>Daftar Lowongan</h2>
+                <div id="jobList" class="list"></div>
+              </div>
+              <div>
+                <h2>Detail Lowongan</h2>
+                <div id="jobDetail" class="card">
+                  Pilih lowongan untuk melihat detail.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="view-applications" class="view hidden">
+            <h2>Lamaran Saya</h2>
+            <div id="applicationList" class="list"></div>
+          </div>
+
+          <div id="view-profile" class="view hidden">
+            <h2>Profil Kandidat</h2>
+            <div id="profileCard" class="card"></div>
+          </div>
+
+          <div id="view-hrd" class="view hidden">
+            <h2>HRD Dashboard</h2>
+            <div class="split">
+              <div>
+                <h3>Form Lowongan</h3>
+                <form id="jobForm" class="form">
+                  <label>Judul Lowongan
+                    <input type="text" id="jobTitle" required />
+                  </label>
+                  <label>Lokasi
+                    <input type="text" id="jobLocation" required />
+                  </label>
+                  <label>Gaji Min
+                    <input type="number" id="jobSalaryMin" required />
+                  </label>
+                  <label>Gaji Max
+                    <input type="number" id="jobSalaryMax" required />
+                  </label>
+                  <label>Usia Min
+                    <input type="number" id="jobMinAge" />
+                  </label>
+                  <label>Usia Max
+                    <input type="number" id="jobMaxAge" />
+                  </label>
+                  <label>Min Pengalaman (tahun)
+                    <input type="number" id="jobMinExp" />
+                  </label>
+                  <button type="submit" class="primary">Buat Lowongan</button>
+                </form>
+              </div>
+              <div>
+                <h3>Lamaran Masuk</h3>
+                <div class="filters">
+                  <div>
+                    <span>Filter Skrining:</span>
+                    <div class="filter-group" id="screeningFilters"></div>
+                  </div>
+                  <div>
+                    <span>Filter Status:</span>
+                    <div class="filter-group" id="statusFilters"></div>
+                  </div>
+                </div>
+                <div id="hrdApplications" class="list"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="view-admin" class="view hidden">
+            <h2>Admin Dashboard</h2>
+            <div class="cards" id="adminMetrics"></div>
+            <h3>Lamaran Terbaru</h3>
+            <div id="adminApplications" class="list"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal hidden" id="videoModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modalTitle">Preview Video</h3>
+          <button id="closeModal" class="ghost">Tutup</button>
+        </div>
+        <video id="modalVideo" controls preload="metadata"></video>
+        <p id="modalMessage" class="hint"></p>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
