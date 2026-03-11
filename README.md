@@ -25,12 +25,7 @@ php artisan serve --host 0.0.0.0 --port 8001
 ```
 
 ## Konfigurasi Supabase (Backend)
-Salin `demo/backend/.env.example` ke `.env` lalu isi:
-- `DB_HOST` (contoh: `db.<project-ref>.supabase.co`)
-- `DB_DATABASE` (biasanya `postgres`)
-- `DB_USERNAME` (biasanya `postgres`)
-- `DB_PASSWORD`
-- `DB_SSLMODE=require`
+Lihat panduan lengkap di `demo/backend/supabase/README.md`.
 
 ## Konfigurasi API (Frontend)
 Salin `demo/frontend/.env.example` ke `.env` lalu sesuaikan:
