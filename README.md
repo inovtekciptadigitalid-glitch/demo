@@ -1,31 +1,42 @@
-# KarirKu Demo (Standalone)
+# KarirKu Demo (Frontend + Backend)
 
-Folder ini berisi demo standalone untuk presentasi ke client. Tidak terhubung ke backend dan tidak bergantung pada folder `frontend`/`backend`.
+Folder `demo` berisi versi demo yang terpisah:
+- `demo/frontend` = frontend (copy dari `../frontend`)
+- `demo/backend` = backend (copy dari `../backend`)
 
-## Jalankan lokal (tanpa build)
-Buka `demo/index.html` langsung di browser, atau pakai server statis:
+Tujuan: tampilan sama dengan local, tetapi bisa di‑deploy terpisah.
 
+## Menjalankan Lokal
+
+Frontend:
 ```bash
-cd demo
-python3 -m http.server 5175
-```
-Lalu buka `http://127.0.0.1:5175`.
-
-## Jalankan lokal (Vite)
-```bash
-cd demo
+cd demo/frontend
 npm install
 npm run dev
 ```
-Lalu buka `http://127.0.0.1:5175`.
 
-## Deploy ke Vercel (gratis)
-1. Buat project baru di Vercel.
-2. Set **Root Directory** ke `demo`.
-3. Build command: `npm run build`.
-4. Output directory: `dist`.
-5. Deploy.
+Backend:
+```bash
+cd demo/backend
+composer install
+php artisan key:generate
+php artisan migrate
+php artisan serve --host 0.0.0.0 --port 8001
+```
 
-Catatan:
-- Demo ini hanya UI interaktif lokal (data disimpan di localStorage).
-- Tidak perlu env atau backend.
+## Konfigurasi Supabase (Backend)
+Salin `demo/backend/.env.example` ke `.env` lalu isi:
+- `DB_HOST` (contoh: `db.<project-ref>.supabase.co`)
+- `DB_DATABASE` (biasanya `postgres`)
+- `DB_USERNAME` (biasanya `postgres`)
+- `DB_PASSWORD`
+- `DB_SSLMODE=require`
+
+## Konfigurasi API (Frontend)
+Salin `demo/frontend/.env.example` ke `.env` lalu sesuaikan:
+- `VITE_API_URL=http://127.0.0.1:8001/api` (local)
+- atau URL backend online (production)
+
+## Deploy
+- Frontend bisa di‑deploy ke Vercel dari folder `demo/frontend`.
+- Backend bisa di‑deploy ke Render/Railway/VPS (gunakan Supabase sebagai DB).

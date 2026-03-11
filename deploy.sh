@@ -2,7 +2,8 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$ROOT_DIR"
+FRONTEND_DIR="$ROOT_DIR/frontend"
+cd "$FRONTEND_DIR"
 
 if ! command -v node >/dev/null 2>&1; then
   echo "Node.js tidak ditemukan. Install Node.js terlebih dulu."
@@ -15,7 +16,7 @@ if ! command -v npm >/dev/null 2>&1; then
 fi
 
 if [ ! -f package.json ]; then
-  echo "package.json tidak ditemukan. Jalankan script ini dari folder demo."
+  echo "package.json tidak ditemukan. Pastikan demo/frontend sudah ada."
   exit 1
 fi
 
@@ -31,7 +32,7 @@ npm run build
 
 if [ ! -d ".vercel" ]; then
   echo "==> Project belum terhubung ke Vercel. Jalankan sekali:"
-  echo "    npx vercel link"
+  echo "    (dari folder demo/frontend) npx vercel link"
   echo "    (Setelah link, jalankan script ini lagi untuk deploy otomatis)"
   exit 1
 fi

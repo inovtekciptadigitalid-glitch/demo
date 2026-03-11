@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-canvas: #f2f5f7;
+  --surface: #ffffff;
+  --ink-primary: #0f172a;
+  --ink-secondary: #475569;
+  --brand: #0b57d0;
+  --brand-strong: #0f172a;
+  --teal: #0f766e;
+  --amber: #f59e0b;
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: 'Manrope', 'Segoe UI', sans-serif;
+    color: var(--ink-primary);
+    background:
+      radial-gradient(55rem 28rem at -15% -10%, rgb(15 118 110 / 18%), transparent 60%),
+      radial-gradient(50rem 22rem at 110% 0%, rgb(11 87 208 / 16%), transparent 62%),
+      var(--bg-canvas);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .brand-title {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 8%) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 8%) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-rise-in {
+  animation: rise-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
