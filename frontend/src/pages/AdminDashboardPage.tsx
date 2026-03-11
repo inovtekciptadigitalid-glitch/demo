@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { api, type AdminOverview, type CompanyItem, type CreateJobPayload, type JobDetail, type JobListItem, type SessionUser } from '../lib/api';
+import { VideoPlayer } from '../components/VideoPlayer';
 import { BarChart3, Briefcase, Building2, CheckCircle2, ClipboardList, LogOut, Trash2, Users, XCircle } from 'lucide-react';
 
 interface AdminDashboardPageProps {
@@ -615,12 +616,7 @@ export function AdminDashboardPage({ user, onLogout }: AdminDashboardPageProps) 
                 Tutup
               </button>
             </div>
-            <video
-              src={previewVideoUrl}
-              controls
-              preload="metadata"
-              className="w-full rounded-xl border border-slate-200"
-            />
+            <VideoPlayer url={previewVideoUrl} title={previewVideoTitle} />
           </div>
         </div>
       )}

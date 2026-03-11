@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api, type ApplicationItem } from '../lib/api';
+import { VideoPlayer } from '../components/VideoPlayer';
 import { FileText, Clock, CheckCircle, XCircle, MapPin, Building } from 'lucide-react';
 
 type Application = ApplicationItem;
@@ -252,12 +253,7 @@ export function ApplicationsPage({ userId, onJobClick }: ApplicationsPageProps) 
                 Tutup
               </button>
             </div>
-            <video
-              src={previewVideoUrl}
-              controls
-              preload="metadata"
-              className="w-full rounded-xl border border-slate-200"
-            />
+            <VideoPlayer url={previewVideoUrl} title={previewVideoTitle} />
           </div>
         </div>
       )}
